@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+patchesStrategicMerge:
+- deployment.yml
+
+resources:
+- ../../base
+- ingress.yaml
+- pdb.yaml
+
+configMapGenerator:
+- name: test99-config
+  behavior: merge
+  literals:
+    - DATABASE_HOST=
+    - DATABASE_NAME=test99_production
+    - ENVIRONMENT=production
